@@ -35,7 +35,6 @@ In your setup query you can also use LOAD CSV loading CSV files from your GitHub
 ----
 LOAD CSV WITH HEADERS FROM "https://github.com/DinTamari/graphgist/blob/master/food.csv" AS row
 WITH row {FILTER}
-MERGE (i:Ingredient {name:row.ingredient}) ON CREATE SET i.type = row.foodClass
 ----
 
 //graph
@@ -48,8 +47,7 @@ MERGE (i:Ingredient {name:row.ingredient}) ON CREATE SET i.type = row.foodClass
 
 [source,cypher]
 ----
-MATCH (a:Person {name: 'Alice'})-[:FRIENDS_WITH]-(:Person)-[:FRIENDS_WITH]-(fof:Person)
-RETURN fof.name as fof, count(*) as frequency
+
 ----
 
 //table
@@ -62,8 +60,7 @@ RETURN fof.name as fof, count(*) as frequency
 
 [source,cypher]
 ----
-MATCH path=(a:Person {name: 'Alice'})-[:FRIENDS_WITH]-(:Person)-[:FRIENDS_WITH]-(fof:Person)
-RETURN path, a, fof
+
 ----
 
 //graph_result
