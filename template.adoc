@@ -36,8 +36,6 @@ In your setup query you can also use LOAD CSV loading CSV files from your GitHub
 LOAD CSV WITH HEADERS FROM "https://github.com/DinTamari/graphgist/blob/master/food.csv" AS row
 WITH row {FILTER}
 MERGE (i:Ingredient {name:row.ingredient})
-MERGE (f:FoodClass {name:row.foodClass})
-MERGE (r:Recipe {name:row.recipeName})
 ----
 
 //graph
