@@ -1,7 +1,5 @@
 = REPLACEME: TITLE OF YOUR GRAPHGIST
 :neo4j-version: 2.3.0
-:author: YOUR NAME
-:twitter: @your_twitter_username
 :style: red:Person(name)
 
 // Please use the style & syntax-help outlined here: https://github.com/neo4j-contrib/graphgist/blob/master/gists/syntax.adoc
@@ -33,19 +31,15 @@ In your setup query you can also use LOAD CSV loading CSV files from your GitHub
 ////
 
 //setup
-//hide
-[source,cypher]
+[source,cypher,subs=attributes]
 ----
-CREATE
-  (a:Person {name: 'Alice'}),
-  (b:Person {name: 'Bob'}),
-  (c:Person {name: 'Carrie'}),
-  (d:Person {name: 'David'}),
-  (e:Person {name: 'Emily'}),
-  (a)-[:FRIENDS_WITH]->(b),
-  (a)-[:FRIENDS_WITH]->(e),
-  (b)-[:FRIENDS_WITH]->(c),
-  (b)-[:FRIENDS_WITH]->(d)
+LOAD CSV WITH HEADERS FROM "https://github.com/DinTamari/graphgist/blob/master/food.csv" AS row
+WITH row {FILTER}
+MERGE (i:Ingredient {name:row.ingredient})
+MERGE (f:FoodClass {name:row.foodClass})
+MERGE (r:Recipe {name:row.recipeName})
+CREATE (i)-[:IS_A {belongs:split(row.belongs,";")}]->(f);
+CREATE (i)-[:IS_INGREDIENT {needed:split(row.needed,";")}]->(r);
 ----
 
 //graph
