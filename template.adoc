@@ -38,8 +38,6 @@ WITH row {FILTER}
 MERGE (i:Ingredient {name:row.ingredient})
 MERGE (f:FoodClass {name:row.foodClass})
 MERGE (r:Recipe {name:row.recipeName})
-CREATE (i)-[:IS_A {belongs:split(row.belongs,";")}]->(f);
-CREATE (i)-[:IS_INGREDIENT {needed:split(row.needed,";")}]->(r);
 ----
 
 //graph
