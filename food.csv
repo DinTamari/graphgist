@@ -1,5 +1,5 @@
 
-ingredient,belongs,foodClass,needed,recipeName
+"ingredient",belongs,foodClass,needed,recipeName
 "Tomato",IS_A,Vegetable,IS_INGREDIENT,Salad
 "Cucumber",IS_A,Vegetable,IS_INGREDIENT,Salad
 "Green Onion",IS_A,Vegetable,IS_OPTIONAL,Salad

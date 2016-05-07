@@ -34,7 +34,7 @@ In your setup query you can also use LOAD CSV loading CSV files from your GitHub
 [source,cypher,subs=attributes]
 ----
 LOAD CSV WITH HEADERS FROM "https://github.com/DinTamari/graphgist/blob/master/food.csv" AS row
-CREATE (i:Ingredient {i.name: row.ingredient});
+CREATE (i:Ingredient {name: row.ingredient});
 ----
 //MERGE (i:Ingredient {name:row.ingredient}) ON CREATE SET i.type = row.foodClass
 
