@@ -33,10 +33,12 @@ In your setup query you can also use LOAD CSV loading CSV files from your GitHub
 //setup
 [source,cypher,subs=attributes]
 ----
-LOAD CSV WITH HEADERS FROM "https://github.com/DinTamari/graphgist/blob/master/food.csv" AS row
-CREATE (i:Ingredient {name: row.ingredient});
+LOAD CSV WITH HEADERS FROM "https://gist.githubusercontent.com/jexp/f78df7b232d0faa171ff/raw/movies_actors.csv" AS row
+WITH row {FILTER}
+MERGE (m:Movie {title:row.title}) ON CREATE SET m.released = toInt(row.released), m.tagline = row.tagline
+MERGE (p:Person {name:row.name}) ON CREATE SET p.born = toInt(row.born)
+CREATE (p)-[:ACTED_IN {roles:split(row.roles,";")}]->(m);
 ----
-//MERGE (i:Ingredient {name:row.ingredient}) ON CREATE SET i.type = row.foodClass
 
 //graph
 
