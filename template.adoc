@@ -34,8 +34,9 @@ In your setup query you can also use LOAD CSV loading CSV files from your GitHub
 [source,cypher,subs=attributes]
 ----
 LOAD CSV WITH HEADERS FROM "https://github.com/DinTamari/graphgist/blob/master/food.csv" AS row
-WITH row {FILTER}
+CREATE (:Ingredient {name: row[0], type:row[2]});
 ----
+//MERGE (i:Ingredient {name:row.ingredient}) ON CREATE SET i.type = row.foodClass
 
 //graph
 
@@ -45,10 +46,7 @@ WITH row {FILTER}
 
 // REMOVEME: A Cypher query with tabular output, returning scalar values
 
-[source,cypher]
-----
 
-----
 
 //table
 
@@ -58,10 +56,7 @@ WITH row {FILTER}
 
 // REMOVEME: A Cypher query to with graph output
 
-[source,cypher]
-----
 
-----
 
 //graph_result
 
