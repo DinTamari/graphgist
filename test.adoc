@@ -96,4 +96,4 @@ REPLACEME: Link to resorces like data sources, further discussions,
 // optional Footer
 ---
 
-Created by {author} - https://twitter.com/{twitter}[Twitter] | http://your.blog.com/[Blog] | https://in.linkedin.com/in/linked-in-handle/[LinkedIn]
+Created by {Din}
