@@ -1,24 +1,24 @@
 
 ingredient,belongs,foodClass,needed,recipeName
 Tomato,IS_A,Vegetable,IS_INGREDIENT,Salad
-Cucumber, IS_A, Vegetable, IS_INGREDIENT, Salad
-Green Onion, IS_A, Vegetable, IS_OPTIONAL, Salad
-Carrot, IS_A, Vegetable, IS_INGREDIENT, Salad
-Olive Oil, IS_A, Oils & Vinegars, IS_INGREDIENT, Salad
-Lemon, IS_A, Fruit, IS_INGREDIENT, Salad
-Salad, IS_A, Condiment, IS_INGREDIENT, Salad
-Black Pepper, IS_A, Condiment, IS_INGREDIENT, Salad
-Green Onion, IS_A, Vegetable, IS_INGREDIENT, Stir Fry
-Carrot, IS_A, Vegetable, IS_INGREDIENT, Stir Fry
-Mushroom, IS_A, Vegetable, IS_OPTIONAL, Stir Fry
-Zucchini, IS_A, Vegetable, IS_INGREDIENT, Stir Fry
-Soy Sauce, IS_A, Sauce, IS_INGREDIENT, Stir Fry
-Chilli Oil, IS_A, Sauce, IS_INGREDIENT, Stir Fry
-Salad, IS_A, Condiment, IS_INGREDIENT, Stir Fry
-Black Pepper, IS_A, Condiment, IS_INGREDIENT, Stir Fry
-Chicken, IS_A, Meat & Fish, IS_OPTIONAL, Stir Fry
-Beef, IS_A, Meat & Fish, IS_OPTIONAL, Stir Fry
-Sea Bass, IS_A, Meat & Fish, IS_OPTIONAL, Stir Fry
-Egg, IS_A, Meat & Fish, IS_INGREDIENT, Stir Fry
-Rice, IS_A, Grains & Cereal, IS_OPTIONAL, Stir Fry
-Noodles, IS_A, Grains & Cereal, IS_OPTIONAL, Stir Fry
+Cucumber,IS_A,Vegetable,IS_INGREDIENT,Salad
+Green Onion,IS_A,Vegetable,IS_OPTIONAL,Salad
+Carrot,IS_A,Vegetable,IS_INGREDIENT,Salad
+Olive Oil,IS_A,Oils & Vinegars,IS_INGREDIENT,Salad
+Lemon,IS_A,Fruit,IS_INGREDIENT,Salad
+Salad,IS_A,Condiment,IS_INGREDIENT,Salad
+Black Pepper,IS_A,Condiment,IS_INGREDIENT,Salad
+Green Onion,IS_A,Vegetable,IS_INGREDIENT,Stir Fry
+Carrot,IS_A,Vegetable,IS_INGREDIENT,Stir Fry
+Mushroom,IS_A,Vegetable,IS_OPTIONAL,Stir Fry
+Zucchini,IS_A,Vegetable,IS_INGREDIENT,Stir Fry
+Soy Sauce,IS_A,Sauce,IS_INGREDIENT,Stir Fry
+Chilli Oil,IS_A,Sauce,IS_INGREDIENT,Stir Fry
+Salad, IS_A,Condiment,IS_INGREDIENT,Stir Fry
+Black Pepper,IS_A,Condiment,IS_INGREDIENT,Stir Fry
+Chicken,IS_A,Meat & Fish,IS_OPTIONAL,Stir Fry
+Beef,IS_A,Meat & Fish,IS_OPTIONAL,Stir Fry
+Sea Bass,IS_A,Meat & Fish,IS_OPTIONAL,Stir Fry
+Egg,IS_A,Meat & Fish,IS_INGREDIENT,Stir Fry
+Rice,IS_A,Grains & Cereal,IS_OPTIONAL,Stir Fry
+Noodles,IS_A,Grains & Cereal,IS_OPTIONAL,Stir Fry
