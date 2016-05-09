@@ -211,7 +211,7 @@ For demonstration purposes: X = "Avocado", naturally since its now or never.
 MATCH (f:Food {name: "Avocado"})-[:IS_INGREDIENT]->(recipe) RETURN recipe
 ----
 
-//graph_result
+//table
 
 
 
@@ -224,7 +224,7 @@ MATCH (f:Food {name: "Avocado"})-[:IS_INGREDIENT]->(recipe) RETURN recipe
 MATCH (f:Food {name: "Avocado"})-[:IS_INGREDIENT]->(recipe) RETURN recipe
 ----
 
-//graph_result
+//table
 
 
 
