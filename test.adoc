@@ -186,38 +186,47 @@ LIMIT 5
 
 //table
 
-== REPLACEME: SECOND USE-CASE TITLE
 
-// REMOVEME: Describe what this use-case is solving and how the query represents that
 
-// REMOVEME: A Cypher query to with graph output
+== USECASE2: What ingredients do I need to make this recipe X?
+
+For demonstration purposes: X = "Guacamole", naturally.
 
 [source,cypher]
 ----
-MATCH path=(a:Person {name: 'Alice'})-[:FRIENDS_WITH]-(:Person)-[:FRIENDS_WITH]-(fof:Person)
-RETURN path, a, fof
+MATCH (f:Food)-[relatedTo]-(:Recipe {name: "Guacamole"}) RETURN f.name, Type(relatedTo), relatedTo
 ----
 
 //graph_result
 
-////
-// You can also use both graph_result and then table if you return full nodes, relationships or paths
-////
 
-== REPLACEME: THIRD USE-CASE TITLE
-// REMOVEME: add as many use-cases as make sense
 
-// optional section
-== Conclusions
 
-REPLACEME: Offer a conclusion
+== USECASE3: Ingredient X needs to be used. Options?
 
-// optional section
-== Resources
+For demonstration purposes: X = "Avocado", naturally since its now or never.
 
-REPLACEME: Link to resorces like data sources, further discussions, 
+[source,cypher]
+----
+MATCH (f:Food {name: "Avocado"})-[:IS_INGREDIENT]->(recipe) RETURN recipe
+----
 
-// optional Footer
----
+//graph_result
 
-Created by {author} - https://twitter.com/{twitter}[Twitter] | http://your.blog.com/[Blog] | https://in.linkedin.com/in/linked-in-handle/[LinkedIn]
+
+
+== USECASE4: 4. Ingredient X needs to be used. Options?
+
+// desciption
+
+[source,cypher]
+----
+MATCH (f:Food {name: "Avocado"})-[:IS_INGREDIENT]->(recipe) RETURN recipe
+----
+
+//graph_result
+
+
+
+
+Created by {Din}
