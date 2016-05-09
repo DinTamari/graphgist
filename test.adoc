@@ -212,7 +212,7 @@ MATCH (f:Food {name: "Avocado"})-[:IS_INGREDIENT]->(recipe)
 RETURN recipe
 ----
 
-//table
+//graph
 
 
 
