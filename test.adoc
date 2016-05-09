@@ -194,9 +194,10 @@ For demonstration purposes: X = "Guacamole", naturally.
 
 [source,cypher]
 ----
-MATCH (f:Food)-[relatedTo]-(:Recipe {name: "Guacamole"}) RETURN f.name, Type(relatedTo), relatedTo
+MATCH (f:Food)-[relatedTo]-(:Recipe {name: "Guacamole"}) 
+RETURN f.name, Type(relatedTo), relatedTo
 ----
-
+//table
 //graph_result
 
 
