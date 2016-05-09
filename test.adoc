@@ -192,11 +192,11 @@ LIMIT 5
 
 For demonstration purposes: X = "Guacamole", naturally!
 
-[source,cypher]
-----
-MATCH (f:Food)-[relatedTo]-(:Recipe {name: "Guacamole"}) 
-RETURN f.name, Type(relatedTo), relatedTo
-----
+//[source,cypher]
+//----
+//MATCH (f:Food)-[relatedTo]-(:Recipe {name: "Guacamole"}) 
+//RETURN f.name, Type(relatedTo), relatedTo
+//----
 //graph_result
 
 
@@ -206,13 +206,13 @@ RETURN f.name, Type(relatedTo), relatedTo
 
 For demonstration purposes: X = "Avocado", naturally since its now or never.
 
-//[source,cypher]
-//----
-//MATCH (f:Food {name: "Avocado"})-[:IS_INGREDIENT]->(recipe) 
-//RETURN recipe
-//----
+[source,cypher]
+----
+MATCH (f:Food {name: "Avocado"})-[:IS_INGREDIENT]->(recipe) 
+RETURN recipe
+----
 
-////graph
+//graph
 
 
 
