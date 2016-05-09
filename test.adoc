@@ -210,7 +210,7 @@ For demonstration purposes: X = "Avocado", naturally since its now or never.
 [source,cypher]
 ----
 MATCH (f:Food {name: "Tomato"})-[:IS_INGREDIENT]->(recipe) 
-RETURN recipe
+RETURN recipe.name AS Name, recipe.portion AS Serves, recipe.time AS Time, recipe.steps AS Steps, recipe.difficulty AS difficulty
 ----
 
 //table
