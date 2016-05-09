@@ -21,9 +21,11 @@ RETURN DISTINCT head(labels(a)) AS This, type(r) as To, head(labels(b)) AS That 
 ////
 
 //image::https://github.com/DinTamari/graphgist/blob/master/foodpic.png[width=600]
-image::http://postimg.org/image/aykhvhpvl/[width=800]
+image::http://i63.tinypic.com/jtnu2q.png[width=800]
 
 == Setup
+
+== Data creation
 
 ////
 A Cypher query to setup the database
