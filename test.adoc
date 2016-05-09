@@ -195,17 +195,17 @@ For demonstration purposes: X = "Guacamole", naturally!
 
 [source,cypher]
 ----
-MATCH (f:Food)-[relatedTo]-(:Recipe {name: "Guacamole"}) 
-RETURN f.name, Type(relatedTo), relatedTo
+MATCH (f:Food)-[:IS_INGREDIENT]-(:Recipe {name: "Guacamole"}) 
+RETURN f.name
 ----
-//graph_result
+//table
 
 
 
 
 == USECASE3: Ingredient X needs to be used. Options?
 
-For demonstration purposes: X = "Tomato", naturally since its now or never.
+For demonstration purposes: X = "Avocado", naturally since its now or never.
 
 [source,cypher]
 ----
