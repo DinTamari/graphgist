@@ -174,16 +174,16 @@ CREATE
 
 //graph
 
-== REPLACEME: FIRST USECASE TITLE
+== USECASE1: Top 5 ingredients
 
 // REMOVEME: Describe what this use-case is solving and how the query represents that
 
-// REMOVEME: A Cypher query with tabular output, returning scalar values
-
 [source,cypher]
 ----
-MATCH (a:Person {name: 'Alice'})-[:FRIENDS_WITH]-(:Person)-[:FRIENDS_WITH]-(fof:Person)
-RETURN fof.name as fof, count(*) as frequency
+MATCH (a:Food)-[:IS_INGREDIENT]->(r:Recipe)
+RETURN a.name, count(*) as freq, collect(r.name) as recipes
+ORDER BY freq DESC
+LIMIT 5
 ----
 
 //table
