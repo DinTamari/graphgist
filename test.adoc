@@ -192,19 +192,19 @@ LIMIT 5
 
 For demonstration purposes: X = "Guacamole", naturally!
 
-//[source,cypher]
-//----
-//MATCH (f:Food)-[relatedTo]-(:Recipe {name: "Guacamole"}) 
-//RETURN f.name, Type(relatedTo), relatedTo
-//----
-//graph_result
+[source,cypher]
+----
+MATCH (f:Food)-[relatedTo]-(:Recipe {name: "Guacamole"}) 
+RETURN f.name, Type(relatedTo), relatedTo
+----
+graph_result
 
 
 
 
 == USECASE3: Ingredient X needs to be used. Options?
 
-For demonstration purposes: X = "Avocado", naturally since its now or never.
+For demonstration purposes: X = "Tomato", naturally since its now or never.
 
 [source,cypher]
 ----
@@ -212,13 +212,13 @@ MATCH (f:Food {name: "Avocado"})-[:IS_INGREDIENT]->(recipe)
 RETURN recipe
 ----
 
-//graph_result
+//table
 
 
 
 
 
-== USECASE5: Given ingredient X, find cocoingredients with have mutual coingredients with X. What.
+== USECASE4: Given ingredient X, find cocoingredients with have mutual coingredients with X. What.
 
 [source, cypher]
 ----
