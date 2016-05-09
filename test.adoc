@@ -209,7 +209,8 @@ For demonstration purposes: X = "Avocado", naturally since its now or never.
 
 [source,cypher]
 ----
-MATCH (f:Food {name: "Avocado"})-[:IS_INGREDIENT]->(recipe) RETURN recipe
+MATCH (f:Food {name: "Avocado"})-[:IS_INGREDIENT]->(recipe) 
+RETURN recipe
 ----
 
 //table
@@ -222,7 +223,8 @@ MATCH (f:Food {name: "Avocado"})-[:IS_INGREDIENT]->(recipe) RETURN recipe
 
 [source,cypher]
 ----
-MATCH (f:Food {name: "Avocado"})-[:IS_INGREDIENT]->(recipe) RETURN recipe
+MATCH (f:Food {name: "Avocado"})-[:IS_INGREDIENT]->(recipe) 
+RETURN recipe
 ----
 
 //table
