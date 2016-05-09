@@ -49,7 +49,7 @@ CREATE (Garlic:Food {name:'Garlic', FoodClass:'Vegetable'})
 
 //Herbs
 CREATE (Cilantro:Food {name:'Cilantro', FoodClass:'Herb'})
-CREATE (Basil:Food {name:'Basil'}, FoodClass:'Herb')
+CREATE (Basil:Food {name:'Basil', FoodClass:'Herb'})
 
 
 //Oils&Vinegars
@@ -172,12 +172,13 @@ CREATE
 
 == USECASE1: Top 5 ingredients
 
-// REMOVEME: Describe what this use-case is solving and how the query represents that
+Find the 5-most used ingredients (excluding the basic condiments and oils/vinegars).
+Returns frequency of use, as well as recipes they are in.
 
 [source,cypher]
 ----
 MATCH (a:Food)-[:IS_INGREDIENT]->(r:Recipe)
-WHERE a.FoodClass <> "Condiment"
+WHERE a.FoodClass <> "Condiment" AND a.FoodClass <> "Oils&Vinegars"
 RETURN a.name, count(*) as freq, collect(r.name) as recipes
 ORDER BY freq DESC
 LIMIT 5
