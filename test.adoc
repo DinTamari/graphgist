@@ -216,17 +216,19 @@ RETURN recipe
 
 
 
-== USECASE4: 4. Ingredient X needs to be used. Options?
 
-// desciption
 
-[source,cypher]
+== USECASE5: Given ingredient X, find cocoingredients with have mutual coingredients with X. What.
+
+[source, cypher]
 ----
-MATCH (f:Food {name: "Avocado"})-[:IS_INGREDIENT]->(recipe) 
-RETURN recipe
+MATCH (tom:Food {name:"Tomato"})-[:IS_INGREDIENT]->(m)<-[:IS_INGREDIENT]-(coIngredients), 
+	(coIngredients)-[:IS_INGREDIENT]->(m2)<-[:IS_INGREDIENT]-(cocoIngredients)
+WHERE NOT (tom)-[:IS_INGREDIENT]->(m2)
+RETURN cocoIngredients.name AS Possibilities, count(*) AS Strength ORDER BY Strength DESC
 ----
 
-//graph_result
+//table
 
 
 
