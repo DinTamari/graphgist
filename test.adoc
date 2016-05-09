@@ -20,8 +20,8 @@ MATCH (a)-[r]->(b) WHERE labels(a) <> [] AND labels(b) <> []
 RETURN DISTINCT head(labels(a)) AS This, type(r) as To, head(labels(b)) AS That LIMIT 10
 ////
 
-image::https://github.com/DinTamari/graphgist/blob/master/foodpic.png[width=600]
-
+//image::https://github.com/DinTamari/graphgist/blob/master/foodpic.png[width=600]
+image::http://postimg.org/image/aykhvhpvl/
 
 == Setup
 
