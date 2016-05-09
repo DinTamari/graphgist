@@ -9,8 +9,7 @@
 
 == Introduction
 
-REPLACEME: Introductory text and domain model image.
-
+Food Graph Database: Ingredient - Recipe
 ////
 Provide an introduction to your domain and what you are trying to accomplish, link to http://a.source.com[sources] as needed.
 
