@@ -1,5 +1,6 @@
 
 "ingredient",belongs,foodClass,needed,recipeName
+
 "Tomato",IS_A,Vegetable,IS_INGREDIENT,Salad
 "Cucumber",IS_A,Vegetable,IS_INGREDIENT,Salad
 "Green Onion",IS_A,Vegetable,IS_OPTIONAL,Salad
@@ -8,6 +9,8 @@
 "Lemon",IS_A,Fruit,IS_INGREDIENT,Salad
 "Salt",IS_A,Condiment,IS_INGREDIENT,Salad
 "Black Pepper",IS_A,Condiment,IS_INGREDIENT,Salad
+
+
 "Green Onion",IS_A,Vegetable,IS_INGREDIENT,Stir Fry
 "Carrot",IS_A,Vegetable,IS_INGREDIENT,Stir Fry
 "Mushroom",IS_A,Vegetable,IS_OPTIONAL,Stir Fry
@@ -22,3 +25,39 @@
 "Egg",IS_A,Meat & Fish,IS_INGREDIENT,Stir Fry
 "Rice",IS_A,Grains & Cereal,IS_OPTIONAL,Stir Fry
 "Noodles",IS_A,Grains & Cereal,IS_OPTIONAL,Stir Fry
+
+
+Queries:
+
+//Top 5 ingredients with their ingredients:
+MATCH (a:Food)-[:INGREDIENT_IN]->(r:Recipe)
+RETURN a.name, count(*) as freq, collect(m.name) as recipes
+ORDER BY freq DESC
+LIMIT 5
+
+1. What can I make for lunch?
+
+2. Get details about chosen recipe: portion and steps.
+
+3. What ingredients do I need to make this recipe?
+
+4. Ingredient X needs to be used. Options?
+
+5. I have a, b, c, d, e, f, g ingredients. What recipes?
+
+
+//possible connection query:
+- connection between different foods (how far apart from the recipes they are in)
+- how strong their combination is: number of recipes they are both in
+
+//Think:
+Food is to Recipes like Actors are to Movies
+You can make the same connections, but need to remove the FoodClass stuff (kinda useless tbh)
+---> Find food that Avocado is not in a recipe with, but have other recipe-ingredients in common
+---> Find a food that can connect avocado to .. yeah i dont know
+
+
+//Toadd:
+- Quantities in IS_INGREDIENT | IS_OPTIONAL relationship
+- Recipe description field
+- snack: apple, banana, chocolate

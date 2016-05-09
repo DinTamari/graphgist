@@ -1,18 +1,18 @@
-= FOOD
+= FOODSTUFF
 :neo4j-version: 2.3.0
-:DIN TAMARI
-:style: red:ingredient(name)
+:author: DIN TAMARI
+:style: red:Food(name)
 :style: green:Recipe(name)
-:style: blue:FoodClass(name)
-
 
 // Please use the style & syntax-help outlined here: https://github.com/neo4j-contrib/graphgist/blob/master/gists/syntax.adoc
 // This is also a good example for a GraphGist: https://gist.github.com/jexp/2014efa6448b307c65e9
 
 == Introduction
 
-Food domain connecting ingredients with recipes, which belong to different classes
-// link to http://a.source.com[sources] as needed.
+REPLACEME: Introductory text and domain model image.
+
+////
+Provide an introduction to your domain and what you are trying to accomplish, link to http://a.source.com[sources] as needed.
 
 Provide a domain model image - using something like http://www.apcjones.com/arrows/# or https://www.gliffy.com/ or a readable screenshot from Neo4j-Browser.
 
@@ -33,15 +33,19 @@ In your setup query you can also use LOAD CSV loading CSV files from your GitHub
 ////
 
 //setup
-[source,cypher,subs=attributes]
+//hide
+[source,cypher]
 ----
-LOAD CSV WITH HEADERS FROM "https://github.com/DinTamari/graphgist/blob/master/food.csv" AS row
-WITH row {FILTER}
-MERGE (i:Ingredient {name:row.ingredient})
-MERGE (f:FoodClass {name:row.foodClass})
-MERGE (r:Recipe {name:row.recipeName})
-CREATE (i)-[:IS_A {belongs:split(row.belongs,";")}]->(f);
-CREATE (i)-[:IS_INGREDIENT {needed:split(row.needed,";")}]->(r);
+CREATE
+  (a:Person {name: 'Alice'}),
+  (b:Person {name: 'Bob'}),
+  (c:Person {name: 'Carrie'}),
+  (d:Person {name: 'David'}),
+  (e:Person {name: 'Emily'}),
+  (a)-[:FRIENDS_WITH]->(b),
+  (a)-[:FRIENDS_WITH]->(e),
+  (b)-[:FRIENDS_WITH]->(c),
+  (b)-[:FRIENDS_WITH]->(d)
 ----
 
 //graph
@@ -55,9 +59,7 @@ CREATE (i)-[:IS_INGREDIENT {needed:split(row.needed,";")}]->(r);
 [source,cypher]
 ----
 MATCH (a:Person {name: 'Alice'})-[:FRIENDS_WITH]-(:Person)-[:FRIENDS_WITH]-(fof:Person)
-MATCH (a:Food {name: 'Tomato'})-[:IS_INGREDIENT]-(:Recipe)-[:IS_RECIPE]-(foundRecipe:Recipe)
-
-RETURN foundRecipe.name as foundRecipe, count(*) as frequency
+RETURN fof.name as fof, count(*) as frequency
 ----
 
 //table
@@ -91,9 +93,9 @@ REPLACEME: Offer a conclusion
 // optional section
 == Resources
 
-REPLACEME: Link to resorces like data sources, further discussions,
+REPLACEME: Link to resorces like data sources, further discussions, 
 
 // optional Footer
 ---
 
-Created by {Din}
+Created by {author} - https://twitter.com/{twitter}[Twitter] | http://your.blog.com/[Blog] | https://in.linkedin.com/in/linked-in-handle/[LinkedIn]
