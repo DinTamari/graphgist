@@ -190,14 +190,14 @@ LIMIT 5
 
 == USECASE2: What ingredients do I need to make this recipe X?
 
-For demonstration purposes: X = "Guacamole", naturally.
+For demonstration purposes: X = "Guacamole", naturally!
 
 [source,cypher]
 ----
 MATCH (f:Food)-[relatedTo]-(:Recipe {name: "Guacamole"}) 
 RETURN f.name, Type(relatedTo), relatedTo
 ----
-//table
+//graph_result
 
 
 
