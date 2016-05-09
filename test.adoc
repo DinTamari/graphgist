@@ -115,9 +115,7 @@ CREATE
 	(BlackPepper)-[:IS_INGREDIENT {quantity: '1 pinch'}]->(BasicSalad),
 	(OliveOil)-[:IS_INGREDIENT {quantity: '2 spoons'}]->(BasicSalad),
 	(Lemon)-[:IS_INGREDIENT {quantity: '1 juiced'}]->(BasicSalad),
-//	(BalsamicVinegar)-[:IS_OPTIONAL {quantity: '2 spoons'}]->(BasicSalad),
 	(GreenOnion)-[:IS_INGREDIENT { quantity: '1', prepare: 'cut into small pieces'}]->(BasicSalad)
-//	(Chicken)-[:IS_OPTIONAL {quantity: '200gr', prepare: 'cut into strips, cook'}]->(BasicSalad)
 
 CREATE (Guacamole:Recipe {name: 'Guacamole', time:'20 minutes', difficulty: 'easy', portion: '4 people', steps: 'do this and do that'})
 CREATE 
@@ -129,7 +127,6 @@ CREATE
 	(Salt)-[:IS_INGREDIENT {quantity: '1 teaspoon'}]->(Guacamole),
 	(BlackPepper)-[:IS_INGREDIENT {quantity: '1/2 teaspoon'}]->(Guacamole),
 	(Lemon)-[:IS_INGREDIENT {quantity: '1 juiced'}]->(Guacamole)
-//	(OliveOil)-[:IS_OPTIONAL {quantity: '2 spoon'}]->(Guacamole)
 
 CREATE (Caprese:Recipe {name: 'Caprese', time:'15 minutes', difficulty: 'supah easy', portion: '2 people',  steps: 'do this and do that'})
 CREATE 
@@ -149,13 +146,9 @@ CREATE
 	(Chili)-[:IS_INGREDIENT {}]->(StirFry),
 	(Carrot)-[:IS_INGREDIENT {}]->(StirFry),
 	(Zucchini)-[:IS_INGREDIENT {}]->(StirFry),
-//	(Chicken)-[:IS_OPTIONAL {}]->(StirFry),
-//	(Beef)-[:IS_OPTIONAL {}]->(StirFry),
-//	(SeaBass)-[:IS_OPTIONAL {}]->(StirFry),
 	(SoySauce)-[:IS_INGREDIENT {}]->(StirFry),
 	(ChilliOil)-[:IS_INGREDIENT {}]->(StirFry),
 	(Noodles)-[:IS_INGREDIENT {}]->(StirFry)
-//	(Rice)-[:IS_OPTIONAL {}]->(StirFry)
 
 
 
@@ -167,8 +160,6 @@ CREATE
 	(Sugar)-[:IS_INGREDIENT {}]->(Pancakes),
 	(BakingPowder)-[:IS_INGREDIENT {}]->(Pancakes),
 	(VanillaExtract)-[:IS_INGREDIENT {}]->(Pancakes)
-//	(Banana)-[:IS_INGREDIENT {}]->(Pancakes),
-//	(Chocolate)-[:IS_INGREDIENT {}]->(Pancakes)
 ----
 
 //graph
@@ -227,10 +218,12 @@ RECIPE DISCOVERER
 
 [source, cypher]
 ----
-MATCH (tom:Food {name:"Tomato"})-[:IS_INGREDIENT]->(m)<-[:IS_INGREDIENT]-(coIngredients), 
-	(coIngredients)-[:IS_INGREDIENT]->(m2)<-[:IS_INGREDIENT]-(cocoIngredients)
-WHERE NOT (tom)-[:IS_INGREDIENT]->(m2) 
-RETURN cocoIngredients.name AS Possibilities, count(*) AS Strength ORDER BY Strength DESC
+MATCH (tom:Food {name:"Tomato"})-[:IS_INGREDIENT]->(m)<-[:IS_INGREDIENT]-(coIngredients),
+    (coIngredients)-[:IS_INGREDIENT]->(m2)<-[:IS_INGREDIENT]-(cocoIngredients)
+WHERE NOT (tom)-[:IS_INGREDIENT]->(m2) AND NOT (cocoIngredients)-[:IS_INGREDIENT]->(m)
+RETURN cocoIngredients.name AS Possibilities, count(*) AS Strength 
+ORDER BY Strength DESC
+LIMIT 5
 ----
 
 //table
