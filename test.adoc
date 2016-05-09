@@ -21,7 +21,7 @@ RETURN DISTINCT head(labels(a)) AS This, type(r) as To, head(labels(b)) AS That 
 ////
 
 //image::https://github.com/DinTamari/graphgist/blob/master/foodpic.png[width=600]
-image::http://postimg.org/image/aykhvhpvl/
+image::http://postimg.org/image/aykhvhpvl/[width=800]
 
 == Setup
 
