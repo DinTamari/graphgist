@@ -36,74 +36,70 @@ In your setup query you can also use LOAD CSV loading CSV files from your GitHub
 [source,cypher]
 ----
 //Veg
-CREATE (Tomato:Food {name:'Tomato'})
-CREATE (Cucumber:Food {name:'Cucumber'})
-CREATE (Carrot:Food {name:'Carrot'})
-CREATE (GreenOnion:Food {name:'Green Onion'})
-CREATE (Mushroom:Food {name:'Mushroom'})
-CREATE (Zucchini:Food {name:'Zucchini'})
-CREATE (Avocado:Food {name:'Avocado'})
-CREATE (Chili:Food {name:'Chili'})
-CREATE (WhiteOnion:Food {name:'WhiteOnion'})
-CREATE (Garlic:Food {name:'Garlic'})
+CREATE (Tomato:Food {name:'Tomato', FoodClass:'Vegetable'})
+CREATE (Cucumber:Food {name:'Cucumber', FoodClass:'Vegetable'})
+CREATE (Carrot:Food {name:'Carrot', FoodClass:'Vegetable'})
+CREATE (GreenOnion:Food {name:'Green Onion', FoodClass:'Vegetable'})
+CREATE (Mushroom:Food {name:'Mushroom', FoodClass:'Vegetable'})
+CREATE (Zucchini:Food {name:'Zucchini', FoodClass:'Vegetable'})
+CREATE (Avocado:Food {name:'Avocado', FoodClass:'Vegetable'})
+CREATE (Chili:Food {name:'Chili', FoodClass:'Vegetable'})
+CREATE (WhiteOnion:Food {name:'WhiteOnion', FoodClass:'Vegetable'})
+CREATE (Garlic:Food {name:'Garlic', FoodClass:'Vegetable'})
 
 //Herbs
-CREATE (Cilantro:Food {name:'Cilantro'})
-CREATE (Basil:Food {name:'Basil'})
+CREATE (Cilantro:Food {name:'Cilantro', FoodClass:'Herb'})
+CREATE (Basil:Food {name:'Basil'}, FoodClass:'Herb')
 
 
 //Oils&Vinegars
-CREATE (OliveOil:Food {name:'Olive Oil'})
-CREATE (BalsamicVinegar:Food {name:'Balsamic Vinegar'})
+CREATE (OliveOil:Food {name:'Olive Oil', FoodClass:'Oils&Vinegars'})
+CREATE (BalsamicVinegar:Food {name:'Balsamic Vinegar', FoodClass:'Oils&Vinegars'})
 
 //Fruit
-CREATE (Lemon:Food {name:'Lemon'})
-CREATE (Apple:Food {name:'Apple'})
-CREATE (Banana:Food {name:'Banana'})
+CREATE (Lemon:Food {name:'Lemon', FoodClass:'Fruit'})
+CREATE (Apple:Food {name:'Apple', FoodClass:'Fruit'})
+CREATE (Banana:Food {name:'Banana', FoodClass:'Fruit'})
 
 
 //Condiments
-CREATE (Salt:Food {name:'Salt'})
-CREATE (BlackPepper:Food {name:'BlackPepper'})
-CREATE (Paprika:Food {name:'Paprika'})
-CREATE (Sugar:Food {name:'Sugar'})
+CREATE (Salt:Food {name:'Salt', FoodClass:'Condiment'})
+CREATE (BlackPepper:Food {name:'BlackPepper', FoodClass:'Condiment'})
+CREATE (Paprika:Food {name:'Paprika', FoodClass:'Condiment'})
+CREATE (Sugar:Food {name:'Sugar', FoodClass:'Condiment'})
 
 
 //Meat&Poultry
-CREATE (Chicken:Food {name:'Chicken'})
-CREATE (Beef:Food {name:'Beef'})
-CREATE (Eggs:Food {name:'Eggs'})
+CREATE (Chicken:Food {name:'Chicken', FoodClass:'Meat&Poultry'})
+CREATE (Beef:Food {name:'Beef', FoodClass:'Meat&Poultry'})
+CREATE (Eggs:Food {name:'Eggs', FoodClass:'Meat&Poultry'})
 
 
 //Fish
-CREATE (SeaBass:Food {name:'SeaBass'})
-CREATE (Salmon:Food {name:'Salmon'})
-CREATE (Tuna:Food {name:'Tuna'})
+CREATE (SeaBass:Food {name:'SeaBass', FoodClass:'Fish'})
+CREATE (Salmon:Food {name:'Salmon', FoodClass:'Fish'})
+CREATE (Tuna:Food {name:'Tuna', FoodClass:'Fish'})
 
 //Grains&Cereals
-CREATE (Rice:Food {name:'Rice'})
-CREATE (Noodles:Food {name:'Noodles'})
-CREATE (Pasta:Food {name:'Pasta'})
-CREATE (WhiteFlour:Food {name: 'White Flour'})
+CREATE (Rice:Food {name:'Rice', FoodClass:'Grains&Cereals'})
+CREATE (Noodles:Food {name:'Noodles', FoodClass:'Grains&Cereals'})
+CREATE (Pasta:Food {name:'Pasta', FoodClass:'Grains&Cereals'})
+CREATE (WhiteFlour:Food {name: 'White Flour', FoodClass:'Grains&Cereals'})
 
 //Dairy
-CREATE (Milk:Food {name:'Milk'})
-CREATE (Cream:Food {name:'Cream'})
-CREATE (Mozzarella:Food {name:'Mozarella'})
-CREATE (Butter:Food {name:'Butter'})
-
-//Sweet (?)
-CREATE (Chocolate:Food {name:'Chocolate'})
-
+CREATE (Milk:Food {name:'Milk', FoodClass:'Dairy'})
+CREATE (Cream:Food {name:'Cream', FoodClass:'Dairy'})
+CREATE (Mozzarella:Food {name:'Mozarella', FoodClass:'Dairy'})
+CREATE (Butter:Food {name:'Butter', FoodClass:'Dairy'})
 
 //Sauces
-CREATE (SoySauce:Food {name:'Soy Sauce'})
-CREATE (ChilliOil:Food {name:'Chilli Oil'})
+CREATE (SoySauce:Food {name:'Soy Sauce', FoodClass:'Sauce'})
+CREATE (ChilliOil:Food {name:'Chilli Oil', FoodClass:'Sauce'})
 
 
 //Other food
-CREATE (BakingPowder:Food {name:'BakingPowder'})
-CREATE (VanillaExtract:Food {name:'VanillaExtract'})
+CREATE (BakingPowder:Food {name:'BakingPowder', FoodClass:'Other'})
+CREATE (VanillaExtract:Food {name:'VanillaExtract', FoodClass:'Other'})
 
 
 //// RECIPES ///
@@ -181,6 +177,7 @@ CREATE
 [source,cypher]
 ----
 MATCH (a:Food)-[:IS_INGREDIENT]->(r:Recipe)
+WHERE a.FoodClass <> "Condiment"
 RETURN a.name, count(*) as freq, collect(r.name) as recipes
 ORDER BY freq DESC
 LIMIT 5
