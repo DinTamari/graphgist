@@ -229,7 +229,7 @@ RECIPE DISCOVERER
 ----
 MATCH (tom:Food {name:"Tomato"})-[:IS_INGREDIENT]->(m)<-[:IS_INGREDIENT]-(coIngredients), 
 	(coIngredients)-[:IS_INGREDIENT]->(m2)<-[:IS_INGREDIENT]-(cocoIngredients)
-WHERE m2.FoodClass <> "Condiment" AND m2.FoodClass <> "Oils&Vinegars"
+WHERE m2.FoodClass <> "Condiment" AND m2.FoodClass <> "Oils&Vinegars" AND
 WHERE NOT (tom)-[:IS_INGREDIENT]->(m2) 
 RETURN cocoIngredients.name AS Possibilities, count(*) AS Strength ORDER BY Strength DESC
 ----
