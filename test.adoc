@@ -195,8 +195,8 @@ For demonstration purposes: X = "Guacamole", naturally!
 
 [source,cypher]
 ----
-MATCH (f:Food)-[:IS_INGREDIENT]-(:Recipe {name: "Guacamole"}) 
-RETURN f.name
+MATCH (f:Food)-[relationship]-(:Recipe {name: "Guacamole"}) 
+RETURN f.name, relationship.quantity AS quantity, relationship.prepare AS prep
 ----
 //table
 
