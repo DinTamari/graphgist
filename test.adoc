@@ -35,16 +35,141 @@ In your setup query you can also use LOAD CSV loading CSV files from your GitHub
 //hide
 [source,cypher]
 ----
+//Veg
+CREATE (Tomato:Food {name:'Tomato'})
+CREATE (Cucumber:Food {name:'Cucumber'})
+CREATE (Carrot:Food {name:'Carrot'})
+CREATE (GreenOnion:Food {name:'Green Onion'})
+CREATE (Mushroom:Food {name:'Mushroom'})
+CREATE (Zucchini:Food {name:'Zucchini'})
+CREATE (Avocado:Food {name:'Avocado'})
+CREATE (Chili:Food {name:'Chili'})
+CREATE (WhiteOnion:Food {name:'WhiteOnion'})
+CREATE (Garlic:Food {name:'Garlic'})
+
+//Herbs
+CREATE (Cilantro:Food {name:'Cilantro'})
+CREATE (Basil:Food {name:'Basil'})
+
+
+//Oils&Vinegars
+CREATE (OliveOil:Food {name:'Olive Oil'})
+CREATE (BalsamicVinegar:Food {name:'Balsamic Vinegar'})
+
+//Fruit
+CREATE (Lemon:Food {name:'Lemon'})
+CREATE (Apple:Food {name:'Apple'})
+CREATE (Banana:Food {name:'Banana'})
+
+
+//Condiments
+CREATE (Salt:Food {name:'Salt'})
+CREATE (BlackPepper:Food {name:'BlackPepper'})
+CREATE (Paprika:Food {name:'Paprika'})
+CREATE (Sugar:Food {name:'Sugar'})
+
+
+//Meat&Poultry
+CREATE (Chicken:Food {name:'Chicken'})
+CREATE (Beef:Food {name:'Beef'})
+CREATE (Eggs:Food {name:'Eggs'})
+
+
+//Fish
+CREATE (SeaBass:Food {name:'SeaBass'})
+CREATE (Salmon:Food {name:'Salmon'})
+CREATE (Tuna:Food {name:'Tuna'})
+
+//Grains&Cereals
+CREATE (Rice:Food {name:'Rice'})
+CREATE (Noodles:Food {name:'Noodles'})
+CREATE (Pasta:Food {name:'Pasta'})
+CREATE (WhiteFlour:Food {name: 'White Flour'})
+
+//Dairy
+CREATE (Milk:Food {name:'Milk'})
+CREATE (Cream:Food {name:'Cream'})
+CREATE (Mozzarella:Food {name:'Mozarella'})
+CREATE (Butter:Food {name:'Butter'})
+
+//Sweet (?)
+CREATE (Chocolate:Food {name:'Chocolate'})
+
+
+//Sauces
+CREATE (SoySauce:Food {name:'Soy Sauce'})
+CREATE (ChilliOil:Food {name:'Chilli Oil'})
+
+
+//Other food
+CREATE (BakingPowder:Food {name:'BakingPowder'})
+CREATE (VanillaExtract:Food {name:'VanillaExtract'})
+
+
+//// RECIPES ///
+CREATE (BasicSalad:Recipe {name: 'BasicSalad', time:'20 minutes', difficulty: 'easy', portion: '4 people', steps: 'do this and do that'})
+CREATE 
+	(Tomato)-[:IS_INGREDIENT {quantity: '2 medium', prepare: 'cut into cubes'}]->(BasicSalad),
+	(Cucumber)-[:IS_INGREDIENT {quantity: '1 medium', prepare: 'cut into cubes'}]->(BasicSalad),
+	(Carrot)-[:IS_INGREDIENT {quantity: '2 small', prepare: 'grate'}]->(BasicSalad),
+	(Salt)-[:IS_INGREDIENT {quantity: '1 teaspoon'}]->(BasicSalad),
+	(BlackPepper)-[:IS_INGREDIENT {quantity: '1 pinch'}]->(BasicSalad),
+	(OliveOil)-[:IS_INGREDIENT {quantity: '2 spoons'}]->(BasicSalad),
+	(Lemon)-[:IS_INGREDIENT {quantity: '1 juiced'}]->(BasicSalad),
+//	(BalsamicVinegar)-[:IS_OPTIONAL {quantity: '2 spoons'}]->(BasicSalad),
+	(GreenOnion)-[:IS_INGREDIENT { quantity: '1', prepare: 'cut into small pieces'}]->(BasicSalad)
+//	(Chicken)-[:IS_OPTIONAL {quantity: '200gr', prepare: 'cut into strips, cook'}]->(BasicSalad)
+
+CREATE (Guacamole:Recipe {name: 'Guacamole', time:'20 minutes', difficulty: 'easy', portion: '4 people', steps: 'do this and do that'})
+CREATE 
+	(Avocado)-[:IS_INGREDIENT {quantity: '2 big', prepare: 'squash'}]->(Guacamole),
+	(Tomato)-[:IS_INGREDIENT {quantity: '2 medium', prepare: 'cut into small cubes'}]->(Guacamole),
+	(Cilantro)-[:IS_INGREDIENT {quantity: '1 handful', prepare: 'chop finely'}]->(Guacamole),
+	(Chili)-[:IS_INGREDIENT {quantity: '1 medium', prepare: 'cut very small pieces'}]->(Guacamole),
+	(WhiteOnion)-[:IS_INGREDIENT {quantity: '1 big', prepare: 'chop small pieces'}]->(Guacamole),
+	(Salt)-[:IS_INGREDIENT {quantity: '1 teaspoon'}]->(Guacamole),
+	(BlackPepper)-[:IS_INGREDIENT {quantity: '1/2 teaspoon'}]->(Guacamole),
+	(Lemon)-[:IS_INGREDIENT {quantity: '1 juiced'}]->(Guacamole)
+//	(OliveOil)-[:IS_OPTIONAL {quantity: '2 spoon'}]->(Guacamole)
+
+CREATE (Caprese:Recipe {name: 'Caprese', time:'15 minutes', difficulty: 'supah easy', portion: '2 people',  steps: 'do this and do that'})
+CREATE 
+	(Tomato)-[:IS_INGREDIENT {quantity: '3 big/6 medium', prepare: 'cut slices'}]->(Caprese),
+	(Mozzarella)-[:IS_INGREDIENT {quantity: '200gr', prepare: 'cut slices'}]->(Caprese),
+	(Basil)-[:IS_INGREDIENT {quantity: '8-10 leaves', prepare: 'chop randomly'}]->(Caprese),
+	(OliveOil)-[:IS_INGREDIENT {quantity: '2 spoons'}]->(Caprese),
+	(BalsamicVinegar)-[:IS_INGREDIENT {quantity: '2 spoons'}]->(Caprese),
+	(Salt)-[:IS_INGREDIENT {quantity: '1 teaspoons'}]->(Caprese),
+	(BlackPepper)-[:IS_INGREDIENT {quantity: '1/2 teaspoons'}]->(Caprese)
+
+
+CREATE(StirFry:Recipe {name:'Stiry Fry', time:'40 minutes', difficulty: 'easy-medium', portion: '4 people', steps: 'do this and do that'})
 CREATE
-  (a:Person {name: 'Alice'}),
-  (b:Person {name: 'Bob'}),
-  (c:Person {name: 'Carrie'}),
-  (d:Person {name: 'David'}),
-  (e:Person {name: 'Emily'}),
-  (a)-[:FRIENDS_WITH]->(b),
-  (a)-[:FRIENDS_WITH]->(e),
-  (b)-[:FRIENDS_WITH]->(c),
-  (b)-[:FRIENDS_WITH]->(d)
+	(OliveOil)-[:IS_INGREDIENT {}]->(StirFry),
+	(Garlic)-[:IS_INGREDIENT {}]->(StirFry),
+	(Chili)-[:IS_INGREDIENT {}]->(StirFry),
+	(Carrot)-[:IS_INGREDIENT {}]->(StirFry),
+	(Zucchini)-[:IS_INGREDIENT {}]->(StirFry),
+//	(Chicken)-[:IS_OPTIONAL {}]->(StirFry),
+//	(Beef)-[:IS_OPTIONAL {}]->(StirFry),
+//	(SeaBass)-[:IS_OPTIONAL {}]->(StirFry),
+	(SoySauce)-[:IS_INGREDIENT {}]->(StirFry),
+	(ChilliOil)-[:IS_INGREDIENT {}]->(StirFry),
+	(Noodles)-[:IS_INGREDIENT {}]->(StirFry)
+//	(Rice)-[:IS_OPTIONAL {}]->(StirFry)
+
+
+
+CREATE(Pancakes:Recipe {name:'Pancakes', time:'30 minutes', difficulty: 'easy', steps: 'do this and do that'})
+CREATE
+	(Butter)-[:IS_INGREDIENT {}]->(Pancakes),
+	(WhiteFlour)-[:IS_INGREDIENT {}]->(Pancakes),
+	(Milk)-[:IS_INGREDIENT {}]->(Pancakes),
+	(Sugar)-[:IS_INGREDIENT {}]->(Pancakes),
+	(BakingPowder)-[:IS_INGREDIENT {}]->(Pancakes),
+	(VanillaExtract)-[:IS_INGREDIENT {}]->(Pancakes)
+//	(Banana)-[:IS_INGREDIENT {}]->(Pancakes),
+//	(Chocolate)-[:IS_INGREDIENT {}]->(Pancakes)
 ----
 
 //graph
