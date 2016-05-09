@@ -219,7 +219,9 @@ RETURN recipe.name AS Name, recipe.portion AS Serves, recipe.time AS Time, recip
 
 
 
-== USECASE4: Given ingredient X, find cocoingredients with have mutual coingredients with X. What.
+== USECASE4: Given ingredient X, find cocoingredients which have mutual coingredients with X. (What.)
+
+RECIPE DISCOVERER
 
 [source, cypher]
 ----
