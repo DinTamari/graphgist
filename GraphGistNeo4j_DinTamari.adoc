@@ -1,0 +1,235 @@
+= FOODSTUFF
+:neo4j-version: 2.3.0
+:author: DIN TAMARI
+:style: red:Food(name)
+:style: green:Recipe(name)
+
+// Please use the style & syntax-help outlined here: https://github.com/neo4j-contrib/graphgist/blob/master/gists/syntax.adoc
+// This is also a good example for a GraphGist: https://gist.github.com/jexp/2014efa6448b307c65e9
+
+== Introduction
+
+Food Graph Database: Ingredient - Recipe
+////
+Provide an introduction to your domain and what you are trying to accomplish, link to http://a.source.com[sources] as needed.
+
+Provide a domain model image - using something like http://www.apcjones.com/arrows/# or https://www.gliffy.com/ or a readable screenshot from Neo4j-Browser.
+
+You can run this query to get an overview of entities and how they are related:
+MATCH (a)-[r]->(b) WHERE labels(a) <> [] AND labels(b) <> []
+RETURN DISTINCT head(labels(a)) AS This, type(r) as To, head(labels(b)) AS That LIMIT 10
+////
+
+//image::https://github.com/DinTamari/graphgist/blob/master/foodpic.png[width=600]
+image::http://i63.tinypic.com/jtnu2q.png[width=800]
+
+== Setup
+
+== Data creation
+
+////
+A Cypher query to setup the database
+Please use a small sample of your domain, at most 150 nodes and 200 relationships are enough for the pedagocial example.
+You can link to the setup of a larger dataset or LOAD CSV queries in a second file of your GitHub Gist at the end.
+In your setup query you can also use LOAD CSV loading CSV files from your GitHub Gist, like here: https://gist.github.com/jexp/f78df7b232d0faa171ff
+////
+
+//setup
+//hide
+[source,cypher]
+----
+//Veg
+CREATE (Tomato:Food {name:'Tomato', FoodClass:'Vegetable'})
+CREATE (Cucumber:Food {name:'Cucumber', FoodClass:'Vegetable'})
+CREATE (Carrot:Food {name:'Carrot', FoodClass:'Vegetable'})
+CREATE (GreenOnion:Food {name:'Green Onion', FoodClass:'Vegetable'})
+CREATE (Mushroom:Food {name:'Mushroom', FoodClass:'Vegetable'})
+CREATE (Zucchini:Food {name:'Zucchini', FoodClass:'Vegetable'})
+CREATE (Avocado:Food {name:'Avocado', FoodClass:'Vegetable'})
+CREATE (Chili:Food {name:'Chili', FoodClass:'Vegetable'})
+CREATE (WhiteOnion:Food {name:'WhiteOnion', FoodClass:'Vegetable'})
+CREATE (Garlic:Food {name:'Garlic', FoodClass:'Vegetable'})
+
+//Herbs
+CREATE (Cilantro:Food {name:'Cilantro', FoodClass:'Herb'})
+CREATE (Basil:Food {name:'Basil', FoodClass:'Herb'})
+
+
+//Oils&Vinegars
+CREATE (OliveOil:Food {name:'Olive Oil', FoodClass:'Oils&Vinegars'})
+CREATE (BalsamicVinegar:Food {name:'Balsamic Vinegar', FoodClass:'Oils&Vinegars'})
+
+//Fruit
+CREATE (Lemon:Food {name:'Lemon', FoodClass:'Fruit'})
+CREATE (Apple:Food {name:'Apple', FoodClass:'Fruit'})
+CREATE (Banana:Food {name:'Banana', FoodClass:'Fruit'})
+
+
+//Condiments
+CREATE (Salt:Food {name:'Salt', FoodClass:'Condiment'})
+CREATE (BlackPepper:Food {name:'BlackPepper', FoodClass:'Condiment'})
+CREATE (Paprika:Food {name:'Paprika', FoodClass:'Condiment'})
+CREATE (Sugar:Food {name:'Sugar', FoodClass:'Condiment'})
+
+
+//Meat&Poultry
+CREATE (Chicken:Food {name:'Chicken', FoodClass:'Meat&Poultry'})
+CREATE (Beef:Food {name:'Beef', FoodClass:'Meat&Poultry'})
+CREATE (Eggs:Food {name:'Eggs', FoodClass:'Meat&Poultry'})
+
+
+//Fish
+CREATE (SeaBass:Food {name:'SeaBass', FoodClass:'Fish'})
+CREATE (Salmon:Food {name:'Salmon', FoodClass:'Fish'})
+CREATE (Tuna:Food {name:'Tuna', FoodClass:'Fish'})
+
+//Grains&Cereals
+CREATE (Rice:Food {name:'Rice', FoodClass:'Grains&Cereals'})
+CREATE (Noodles:Food {name:'Noodles', FoodClass:'Grains&Cereals'})
+CREATE (Pasta:Food {name:'Pasta', FoodClass:'Grains&Cereals'})
+CREATE (WhiteFlour:Food {name: 'White Flour', FoodClass:'Grains&Cereals'})
+
+//Dairy
+CREATE (Milk:Food {name:'Milk', FoodClass:'Dairy'})
+CREATE (Cream:Food {name:'Cream', FoodClass:'Dairy'})
+CREATE (Mozzarella:Food {name:'Mozarella', FoodClass:'Dairy'})
+CREATE (Butter:Food {name:'Butter', FoodClass:'Dairy'})
+
+//Sauces
+CREATE (SoySauce:Food {name:'Soy Sauce', FoodClass:'Sauce'})
+CREATE (ChilliOil:Food {name:'Chilli Oil', FoodClass:'Sauce'})
+
+
+//Other food
+CREATE (BakingPowder:Food {name:'BakingPowder', FoodClass:'Other'})
+CREATE (VanillaExtract:Food {name:'VanillaExtract', FoodClass:'Other'})
+
+
+//// RECIPES ///
+CREATE (BasicSalad:Recipe {name: 'BasicSalad', time:'20 minutes', difficulty: 'easy', portion: '4 people', steps: 'do this and do that'})
+CREATE 
+	(Tomato)-[:IS_INGREDIENT {quantity: '2 medium', prepare: 'cut into cubes'}]->(BasicSalad),
+	(Cucumber)-[:IS_INGREDIENT {quantity: '1 medium', prepare: 'cut into cubes'}]->(BasicSalad),
+	(Carrot)-[:IS_INGREDIENT {quantity: '2 small', prepare: 'grate'}]->(BasicSalad),
+	(Salt)-[:IS_INGREDIENT {quantity: '1 teaspoon'}]->(BasicSalad),
+	(BlackPepper)-[:IS_INGREDIENT {quantity: '1 pinch'}]->(BasicSalad),
+	(OliveOil)-[:IS_INGREDIENT {quantity: '2 spoons'}]->(BasicSalad),
+	(Lemon)-[:IS_INGREDIENT {quantity: '1 juiced'}]->(BasicSalad),
+	(GreenOnion)-[:IS_INGREDIENT { quantity: '1', prepare: 'cut into small pieces'}]->(BasicSalad)
+
+CREATE (Guacamole:Recipe {name: 'Guacamole', time:'20 minutes', difficulty: 'easy', portion: '4 people', steps: 'do this and do that'})
+CREATE 
+	(Avocado)-[:IS_INGREDIENT {quantity: '2 big', prepare: 'squash'}]->(Guacamole),
+	(Tomato)-[:IS_INGREDIENT {quantity: '2 medium', prepare: 'cut into small cubes'}]->(Guacamole),
+	(Cilantro)-[:IS_INGREDIENT {quantity: '1 handful', prepare: 'chop finely'}]->(Guacamole),
+	(Chili)-[:IS_INGREDIENT {quantity: '1 medium', prepare: 'cut very small pieces'}]->(Guacamole),
+	(WhiteOnion)-[:IS_INGREDIENT {quantity: '1 big', prepare: 'chop small pieces'}]->(Guacamole),
+	(Salt)-[:IS_INGREDIENT {quantity: '1 teaspoon'}]->(Guacamole),
+	(BlackPepper)-[:IS_INGREDIENT {quantity: '1/2 teaspoon'}]->(Guacamole),
+	(Lemon)-[:IS_INGREDIENT {quantity: '1 juiced'}]->(Guacamole)
+
+CREATE (Caprese:Recipe {name: 'Caprese', time:'15 minutes', difficulty: 'supah easy', portion: '2 people',  steps: 'do this and do that'})
+CREATE 
+	(Tomato)-[:IS_INGREDIENT {quantity: '3 big/6 medium', prepare: 'cut slices'}]->(Caprese),
+	(Mozzarella)-[:IS_INGREDIENT {quantity: '200gr', prepare: 'cut slices'}]->(Caprese),
+	(Basil)-[:IS_INGREDIENT {quantity: '8-10 leaves', prepare: 'chop randomly'}]->(Caprese),
+	(OliveOil)-[:IS_INGREDIENT {quantity: '2 spoons'}]->(Caprese),
+	(BalsamicVinegar)-[:IS_INGREDIENT {quantity: '2 spoons'}]->(Caprese),
+	(Salt)-[:IS_INGREDIENT {quantity: '1 teaspoons'}]->(Caprese),
+	(BlackPepper)-[:IS_INGREDIENT {quantity: '1/2 teaspoons'}]->(Caprese)
+
+
+CREATE(StirFry:Recipe {name:'Stiry Fry', time:'40 minutes', difficulty: 'easy-medium', portion: '4 people', steps: 'do this and do that'})
+CREATE
+	(OliveOil)-[:IS_INGREDIENT {}]->(StirFry),
+	(Garlic)-[:IS_INGREDIENT {}]->(StirFry),
+	(Chili)-[:IS_INGREDIENT {}]->(StirFry),
+	(Carrot)-[:IS_INGREDIENT {}]->(StirFry),
+	(Zucchini)-[:IS_INGREDIENT {}]->(StirFry),
+	(SoySauce)-[:IS_INGREDIENT {}]->(StirFry),
+	(ChilliOil)-[:IS_INGREDIENT {}]->(StirFry),
+	(Noodles)-[:IS_INGREDIENT {}]->(StirFry)
+
+
+
+CREATE(Pancakes:Recipe {name:'Pancakes', time:'30 minutes', difficulty: 'easy', steps: 'do this and do that'})
+CREATE
+	(Butter)-[:IS_INGREDIENT {}]->(Pancakes),
+	(WhiteFlour)-[:IS_INGREDIENT {}]->(Pancakes),
+	(Milk)-[:IS_INGREDIENT {}]->(Pancakes),
+	(Sugar)-[:IS_INGREDIENT {}]->(Pancakes),
+	(BakingPowder)-[:IS_INGREDIENT {}]->(Pancakes),
+	(VanillaExtract)-[:IS_INGREDIENT {}]->(Pancakes)
+----
+
+//graph
+
+== USECASE1: Top 5 ingredients
+
+Find the 5-most used ingredients (excluding the basic condiments and oils/vinegars).
+Returns frequency of use, as well as recipes they are in.
+
+[source,cypher]
+----
+MATCH (a:Food)-[:IS_INGREDIENT]->(r:Recipe)
+WHERE a.FoodClass <> "Condiment" AND a.FoodClass <> "Oils&Vinegars"
+RETURN a.name, count(*) as freq, collect(r.name) as recipes
+ORDER BY freq DESC
+LIMIT 5
+----
+
+//table
+
+
+
+== USECASE2: What ingredients do I need to make this recipe X?
+
+For demonstration purposes: X = "Guacamole", naturally!
+
+[source,cypher]
+----
+MATCH (f:Food)-[r:IS_INGREDIENT]-(:Recipe {name: "Guacamole"}) 
+RETURN f.name, r.quantity AS quantity, r.prepare AS prep
+----
+//table
+
+
+
+
+== USECASE3: Ingredient X needs to be used. Options?
+
+For demonstration purposes: X = "Avocado", naturally since its now or never.
+
+[source,cypher]
+----
+MATCH (f:Food {name: "Tomato"})-[:IS_INGREDIENT]->(recipe) 
+RETURN recipe.name AS Name, recipe.portion AS Serves, recipe.time AS Time, recipe.steps AS Steps, recipe.difficulty AS difficulty
+----
+
+//table
+
+
+
+
+
+== USECASE4: Given ingredient X, find cocoingredients which have mutual coingredients with X.
+
+RECIPE DISCOVERER
+So, from the results below, I should clearly try to come up with a recipe that has tomatoes, zucchini, soy sauce, and garlic for example. Which actually doesn't sound too bad!
+
+[source, cypher]
+----
+MATCH (tom:Food {name:"Tomato"})-[:IS_INGREDIENT]->(m)<-[:IS_INGREDIENT]-(coIngredients),
+    (coIngredients)-[:IS_INGREDIENT]->(m2)<-[:IS_INGREDIENT]-(cocoIngredients)
+WHERE NOT (tom)-[:IS_INGREDIENT]->(m2) AND NOT (cocoIngredients)-[:IS_INGREDIENT]->(m)
+RETURN cocoIngredients.name AS Possibilities, count(*) AS Strength 
+ORDER BY Strength DESC
+LIMIT 5
+----
+
+//table
+
+
+
+
+Created by {Din}
